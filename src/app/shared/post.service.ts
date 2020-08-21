@@ -11,7 +11,7 @@ export class PostService {
   }
 
   create(post: Post): Observable<Post> {
-    return this.http.post(`${environment.bfDbUrl}/posts.json`, post)
+    return this.http.post(`${environment.fbDbUrl}/posts.json`, post)
       .pipe(map((response: FbCreateResponse) => {
           return {
             ...post,
@@ -21,5 +21,22 @@ export class PostService {
         }
         )
       );
+  }
+
+  getAll(): Observable<Post[]> {
+    return this.http.get(`${environment.fbDbUrl}/posts.json`)
+      .pipe(map((response: { [key: string]: any }) => {
+        return Object
+          .keys(response)
+          .map(key => ({
+            ...response[key],
+            id: key,
+            date: new Date(response[key].date)
+          }));
+      }));
+  }
+
+  remove(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`);
   }
 }

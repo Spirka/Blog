@@ -7,7 +7,7 @@ import {Environment} from './interface';
 export const environment: Environment = {
   production: false,
   apiKey: 'AIzaSyCcq1kuhfTlQEqKawtFpW18LMOA3ZlCJMY',
-  bfDbUrl: 'https://angular-blog-a507a.firebaseio.com/'
+  fbDbUrl: 'https://angular-blog-a507a.firebaseio.com/'
 };
 
 /*
